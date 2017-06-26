@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import by.learning.extapi.domain.Rate;
-import by.learning.extapi.service.RateService;
+import by.learning.extapi.service.rate.RateService;
 
 @Controller
 public class HomeController {
