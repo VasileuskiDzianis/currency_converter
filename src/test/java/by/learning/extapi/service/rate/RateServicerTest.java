@@ -12,9 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import by.learning.extapi.dao.rate.RateDao;
-import by.learning.extapi.dao.rate.RateDaoImpl;
 import by.learning.extapi.domain.Rate;
+import by.learning.extapi.service.nbrb.NbrbApi;
+import by.learning.extapi.service.nbrb.NbrbApiImpl;
 import by.learning.extapi.service.rate.RateService;
 import by.learning.extapi.service.rate.RateServiceImpl;
 
@@ -45,7 +45,7 @@ public class RateServicerTest {
 	private static final BigDecimal RUB_TO_BYN = new BigDecimal("0.1761");
 	
 	@Mock
-	private RateDao rateDao = new RateDaoImpl();
+	private NbrbApi nbrbApi = new NbrbApiImpl();
 	
 	@InjectMocks
 	private RateService rateService = new RateServiceImpl();
@@ -73,10 +73,10 @@ public class RateServicerTest {
 		bynRate.setScale(BYN_SCALE);
 		bynRate.setOfficialRate(BYN_RATE);
 
-		when(rateDao.getOneById(USD_ID)).thenReturn(usdRate);
-		when(rateDao.getOneById(EUR_ID)).thenReturn(eurRate);
-		when(rateDao.getOneById(RUB_ID)).thenReturn(rubRate);
-		when(rateDao.getOneById(BYN_ID)).thenReturn(bynRate);
+		when(nbrbApi.getOneById(USD_ID)).thenReturn(usdRate);
+		when(nbrbApi.getOneById(EUR_ID)).thenReturn(eurRate);
+		when(nbrbApi.getOneById(RUB_ID)).thenReturn(rubRate);
+		when(nbrbApi.getOneById(BYN_ID)).thenReturn(bynRate);
 	}
 
 	@Test

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import by.learning.extapi.domain.Rate;
-import by.learning.extapi.service.rate.RateService;
+import by.learning.extapi.service.nbrb.NbrbApi;
 
 @Controller
 public class HomeController {
@@ -20,13 +20,13 @@ public class HomeController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
-	private RateService rateService;
+	private NbrbApi nbrbApi;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		// LOGGER.info("Welcome home! The client locale is {}.", locale);
 
-		List<Rate> rateList = rateService.getAllRates();
+		List<Rate> rateList = nbrbApi.getAll();
 
 		model.addAttribute("rateList", rateList);
 

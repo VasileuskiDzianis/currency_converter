@@ -1,4 +1,4 @@
-package by.learning.extapi.dao.rate;
+package by.learning.extapi.service.nbrb;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import by.learning.extapi.domain.Rate;
 
 @Repository
-public class RateDaoImpl implements RateDao {
+public class NbrbApiImpl implements NbrbApi {
 	private String urlGet = "http://www.nbrb.by/API/ExRates/Rates";
 	private URL url;
 
