@@ -25,4 +25,4 @@ public class ConverterController {
 		
 		return rateService.convert(amount, sourceId, targetId).toString();
 	}
-}
+} 
