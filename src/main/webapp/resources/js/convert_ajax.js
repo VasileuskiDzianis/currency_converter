@@ -29,4 +29,4 @@ var targetSelect;
             	document.getElementsByName('result_field')[0].value = 'internal error occurred';;
             }
         });
-    } 
+    }
