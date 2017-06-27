@@ -6,7 +6,7 @@ import by.learning.extapi.domain.Rate;
 
 public interface NbrbApi {
 
-	Rate getOneById(int id);
+	Rate getRateById(int id);
 
-	List<Rate> getAll();
+	List<Rate> getAllRates();
 }

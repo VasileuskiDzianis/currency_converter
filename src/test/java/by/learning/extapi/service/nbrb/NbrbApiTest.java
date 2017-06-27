@@ -10,14 +10,14 @@ import by.learning.extapi.domain.Rate;
 
 public class NbrbApiTest {
 	private static final int USD_ID = 145;
-	private static final int QUOTED_CURRENCIES_NUMBER = 26;
+	private static final int QUOTED_CURRENCIES_NUMBER = 27;
 
 	@Test
 	public void getOneByIdTest() {
 
 		NbrbApi nbrbApi = new NbrbApiImpl();
 
-		Rate rate = nbrbApi.getOneById(USD_ID);
+		Rate rate = nbrbApi.getRateById(USD_ID);
 
 		assertEquals(145, rate.getId());
 		assertEquals("USD", rate.getAbbreviation());
@@ -30,7 +30,7 @@ public class NbrbApiTest {
 
 		NbrbApi nbrbApi = new NbrbApiImpl();
 
-		List<Rate> rateList = nbrbApi.getAll();
+		List<Rate> rateList = nbrbApi.getAllRates();
 
 		assertEquals(QUOTED_CURRENCIES_NUMBER, rateList.size());
 	}

@@ -73,10 +73,10 @@ public class RateServicerTest {
 		bynRate.setScale(BYN_SCALE);
 		bynRate.setOfficialRate(BYN_RATE);
 
-		when(nbrbApi.getOneById(USD_ID)).thenReturn(usdRate);
-		when(nbrbApi.getOneById(EUR_ID)).thenReturn(eurRate);
-		when(nbrbApi.getOneById(RUB_ID)).thenReturn(rubRate);
-		when(nbrbApi.getOneById(BYN_ID)).thenReturn(bynRate);
+		when(nbrbApi.getRateById(USD_ID)).thenReturn(usdRate);
+		when(nbrbApi.getRateById(EUR_ID)).thenReturn(eurRate);
+		when(nbrbApi.getRateById(RUB_ID)).thenReturn(rubRate);
+		when(nbrbApi.getRateById(BYN_ID)).thenReturn(bynRate);
 	}
 
 	@Test

@@ -18,8 +18,8 @@ public class RateServiceImpl implements RateService {
 	public BigDecimal convert(BigDecimal amount, int sourceCurrencyId, int tagetCurrencyId) {
 		BigDecimal result;
 
-		Rate sourceRate = nbrbApi.getOneById(sourceCurrencyId);
-		Rate targetRate = nbrbApi.getOneById(tagetCurrencyId);
+		Rate sourceRate = nbrbApi.getRateById(sourceCurrencyId);
+		Rate targetRate = nbrbApi.getRateById(tagetCurrencyId);
 
 		result = amount.divide(new BigDecimal(sourceRate.getScale()), 4, RoundingMode.HALF_UP);
 		result = result.multiply(sourceRate.getOfficialRate());
