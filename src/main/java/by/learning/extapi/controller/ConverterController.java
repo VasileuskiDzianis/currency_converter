@@ -3,6 +3,7 @@ package by.learning.extapi.controller;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,11 +17,11 @@ public class ConverterController {
 	@Autowired
 	private RateService rateService;
 
-	@RequestMapping(value = "api/convert", method = RequestMethod.GET)
+	@RequestMapping(value = "api/convert/{amount}/{sourceId}/{targetId}", method = RequestMethod.GET)
 	public String convert(Model model, 
-			@RequestParam(name = "source") int sourceId, 
-			@RequestParam(name = "target") int targetId,
-			@RequestParam(name = "amount") BigDecimal amount) {
+			@PathVariable int sourceId, 
+			@PathVariable int targetId,
+			@PathVariable BigDecimal amount) {
 		
 		return rateService.convert(amount, sourceId, targetId).toString();
 	}

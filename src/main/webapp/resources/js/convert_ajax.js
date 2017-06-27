@@ -19,7 +19,7 @@ var targetSelect;
     	
         $.ajax({
             type: 'GET',
-            url:  prefix + '?' + 'amount=' + amount + '&' + 'source=' + source + '&' + 'target=' + target,
+            url:  prefix + '/' + amount + '/' + source + '/' + target,
             dataType: 'json',
             async: true,
             success: function(result) {
