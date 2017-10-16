@@ -14,17 +14,18 @@ import by.learning.extapi.service.nbrb.NbrbApi;
 
 @Controller
 public class HomeController {
+	private static final String HOME_PAGE = "home";
+	private static final String RATE_LIST_MODEL = "rateList";
 
 	@Autowired
 	private NbrbApi nbrbApi;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-
 		List<Rate> rateList = nbrbApi.getAllRates();
 
-		model.addAttribute("rateList", rateList);
+		model.addAttribute(RATE_LIST_MODEL, rateList);
 
-		return "home";
+		return HOME_PAGE;
 	}
 }

@@ -8,14 +8,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Rate {
 	@JsonProperty("Cur_ID")
 	private int id;
+
 	@JsonProperty("Date")
 	private Date date;
+
 	@JsonProperty("Cur_Abbreviation")
 	private String abbreviation;
+
 	@JsonProperty("Cur_Scale")
 	private int scale;
+
 	@JsonProperty("Cur_Name")
 	private String name;
+
 	@JsonProperty("Cur_OfficialRate")
 	private BigDecimal officialRate;
 
@@ -72,5 +77,4 @@ public class Rate {
 		return "Rate [id=" + id + ", date=" + date + ", abbreviation=" + abbreviation + ", scale=" + scale + ", name="
 				+ name + ", officialRate=" + officialRate + "]";
 	}
-
 }
