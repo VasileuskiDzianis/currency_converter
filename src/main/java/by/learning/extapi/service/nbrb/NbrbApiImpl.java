@@ -1,8 +1,6 @@
 package by.learning.extapi.service.nbrb;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,27 +15,35 @@ import by.learning.extapi.domain.Rate;
 
 @Service
 public class NbrbApiImpl implements NbrbApi {
-	private String urlGet = "http://www.nbrb.by/API/ExRates/Rates";
-	private URL url;
+	private static final String PERIODICITY_0 = "?Periodicity=0";
+	private static final String PATH_SPLITTER = "/";
+	
+	private static final BigDecimal BYN_TO_BYN_RATE = new BigDecimal("1.0000");
+	private static final String BYN_NAME = "Белорусский рубль";
+	private static final int BYN_SCALE = 1;
+	private static final String BYN_ABBREVIATION = "BYN";
+	private static final int BYN_ID = -1;
+	
+	private static final String URL_GET_RATE = "http://www.nbrb.by/API/ExRates/Rates";
 
 	/*
 	 * We have to add BYN rate because NBRB API doesn't return this object
 	 */
-	private Rate bynRate = new Rate();
-	{
-		bynRate.setId(-1);
+	private final Rate bynRate;
+	
+	public NbrbApiImpl() {
+		bynRate = new Rate();
+		bynRate.setId(BYN_ID);
 		bynRate.setDate(new Date());
-		bynRate.setAbbreviation("BYN");
-		bynRate.setScale(1);
-		bynRate.setName("Белорусский рубль");
-		bynRate.setOfficialRate(new BigDecimal("1.0000"));
+		bynRate.setAbbreviation(BYN_ABBREVIATION);
+		bynRate.setScale(BYN_SCALE);
+		bynRate.setName(BYN_NAME);
+		bynRate.setOfficialRate(BYN_TO_BYN_RATE);
 	}
 
 	@Override
 	public Rate getRateById(int id) {
-
-		if (id == -1) {
-
+		if (id == BYN_ID) {
 			return bynRate;
 		}
 
@@ -45,16 +51,9 @@ public class NbrbApiImpl implements NbrbApi {
 		Rate rate = null;
 
 		try {
-			url = new URL(urlGet + "/" + id);
-		} catch (MalformedURLException e) {
-			
-			e.printStackTrace();
-		}
-
-		try {
+			URL url = new URL(URL_GET_RATE + PATH_SPLITTER + id);
 			rate = mapper.readValue(url, Rate.class);
-		} catch (IOException e) {
-			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -64,24 +63,16 @@ public class NbrbApiImpl implements NbrbApi {
 	@Override
 	public List<Rate> getAllRates() {
 		ObjectMapper mapper = new ObjectMapper();
-		List<Rate> rateList = null;
+		List<Rate> rateList = new ArrayList<>();
+		rateList.add(bynRate);
 
 		try {
-			url = new URL(urlGet + "?Periodicity=0");
-		} catch (MalformedURLException e) {
-			
+			URL url = new URL(URL_GET_RATE + PERIODICITY_0);
+			rateList.addAll(Arrays.asList(mapper.readValue(url, Rate[].class)));
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		try {
-			rateList = new ArrayList<Rate>(Arrays.asList(mapper.readValue(url, Rate[].class)));
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-		rateList.add(0, bynRate);
+		} 
 
 		return rateList;
 	}
-
 }
